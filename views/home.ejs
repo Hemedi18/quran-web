@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>home</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <div class="loader"></div>
+  <header>
+    <nav>
+      <ul>
+        <li><a href="#">Surah</a></li>
+        <li><a href="#about">Ayah</a></li>
+        <li><a href="#contact">International qurra</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <section class="random-aya">
+      <% if (locals.aya) {%>
+      <h2>TODAY'S AYA</h2>
+
+      <p class="aya-text">
+       <%= aya.text %>
+      </p>
+
+      <p class="aya-reference">
+        <span class="from-sura"><%= aya.numberInSurah %>,<%= aya.juz %></span>, 
+        <span class="from-aya"><%= aya.number %></span>
+      </p>
+      
+      <% } %>
+    </section>
+
+
+    <div class="Surah-list">
+      <% if (locals.surah) {%>
+      <h2>LIST OF SURAS</h2>
+      <ul>
+        <% for ( const sura of surah.data.surahs) {%>
+        <li id='<%= sura.number %>'>
+          <div class="sura-container">
+            <h3> 
+              <span class="english"> <%= sura.englishName %> </span> 
+              <span class="arabic"> <%= sura.name %> </span>
+            </h3>
+            <ul>
+              <li class="sura-number">
+                Sura Number : <span class="show"><%= sura.number %></span>
+              </li>
+              <li class="juz-number">
+                juz Number : <span class="show"> <%= sura.ayahs[0].juz %> </span>
+              </li>
+              <li class="aya-count">
+                Ayat count : <span class="show"> <%= sura.ayahs.length %> </span>
+              </li>
+              <li class="meaning">
+                Meaning : <span class="show"> <%= sura.englishNameTranslation %> </span>
+              </li>
+              <li class="revelation-type">
+                Revelation Type : <span class="show"> <%= sura.revelationType %> </span>
+              </li>
+              
+            </ul>
+            <a href="sura.html"><button class="read-mo">Read More</button></a>
+          </div>
+        </li>
+        <% } %>
+      </ul>
+      <% } %>
+    </div>
+
+  </main>
+
+  <footer> 
+    <p>&copy; 2024 Quran App. All rights reserved.</p>
+  </footer>
+</body>
+</html>
