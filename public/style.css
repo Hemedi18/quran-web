@@ -287,6 +287,9 @@ footer h3{
   gap: 1rem;
   
 }
+.sura-container li{
+  font-size: .8rem;
+}
 .sura-container::-webkit-scrollbar{
   width: 10px;
 }
