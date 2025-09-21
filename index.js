@@ -51,7 +51,22 @@ app.get('/', async (req, res) => {
     const agent = new https.Agent({ rejectUnauthorized: false });
     const response = await axios.get("https://api.alquran.cloud/v1/quran/en.asad", { httpsAgent: agent });
     const quranData = response.data;
-    res.render('index.ejs', { surah: quranData, aya: quranData });
+
+    // getting random ayah
+    const totalAyahs = quranData.data.surahs.reduce((sum, surah) => sum + surah.ayahs.length, 0);
+    const randomAyahIndex = Math.floor(Math.random() * totalAyahs);
+    let currentIndex = 0;
+    let randomAyah;
+
+    for (const surah of quranData.data.surahs) {
+      if (randomAyahIndex < currentIndex + surah.ayahs.length) {
+        randomAyah = surah.ayahs[randomAyahIndex - currentIndex];
+        break;
+      }
+      currentIndex += surah.ayahs.length;
+    }
+
+    res.render('index.ejs', { surah: quranData, aya: randomAyah });
   } catch (error) {
     console.error('Error fetching data from API:', error);
     // Log more error details for debugging
