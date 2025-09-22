@@ -11,7 +11,19 @@
   <header>
     <nav>
       <ul>
-        <li><a href="#">Surah</a></li>
+        <li>
+          <% if (locals.surah) { %>
+            <form action="/selected-surah">
+              <label for="surahs">Surahs</label>
+              <select name="surahs" id="surahs">
+                <% for ( const surat of surah.data.surahs) {%>
+                  <option value="<%= surat.number %>"><a href="#<%= surat.number %>"><%= surat.englishName %> - <%= surat.name %></a></option>
+                <% } %>
+              </select>
+            </form>
+          <% } %>
+          <button type="submit">search</button>
+        </li>
         <li><a href="#about">Ayah</a></li>
         <li><a href="#contact">International qurra</a></li>
       </ul>
@@ -78,5 +90,6 @@
   <footer> 
     <p>&copy; 2024 Quran App. All rights reserved.</p>
   </footer>
+  <script src="script.js"></script>
 </body>
 </html>
