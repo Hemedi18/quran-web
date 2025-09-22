@@ -293,7 +293,6 @@ footer h3{
 .sura-container::-webkit-scrollbar{
   width: 10px;
 }
-
 /* adding scrollbar for surah container */
 #surahs{
   background-color: rgb(72, 62, 46);
